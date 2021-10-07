@@ -1,5 +1,11 @@
 import 'package:douban_movies/widgets/tabber_item.dart';
 import 'package:flutter/material.dart';
+import 'package:douban_movies/views/home/home.dart';
+import 'package:douban_movies/views/mall/mall.dart';
+import 'package:douban_movies/views/profile/profile.dart';
+import 'package:douban_movies/views/subject/subject.dart';
+import 'package:douban_movies/views/group/group.dart';
+
 // import 'package:flutter/rendering.dart';
 
 void main() {
@@ -37,11 +43,15 @@ class _MyStackState extends State<MyStackPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Movies")
-      ),
-      body: const Center(
-        child: Text("Hello"),
+      body: IndexedStack(
+        index: _currentIndex,
+        children: const <Widget>[
+          Home(),
+          Subject(),
+          Group(),
+          Mall(),
+          Profile()
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
