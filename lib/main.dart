@@ -1,3 +1,4 @@
+import 'package:douban_movies/widgets/tabber_item.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter/rendering.dart';
 
@@ -45,15 +46,13 @@ class _MyStackState extends State<MyStackPage> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         unselectedFontSize: 14,
-        items: const [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: '首页',
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.category),
-              label: '分类'
-          ),
+        type: BottomNavigationBarType.fixed ,
+        items: [
+          TabBarItem('home', '首页'),
+          TabBarItem('subject', '书影音'),
+          TabBarItem('group', '小组'),
+          TabBarItem('mall', '市集'),
+          TabBarItem('profile', '我的'),
         ],
         onTap: (int index) =>  setState(() { _currentIndex = index; }),
       ),
