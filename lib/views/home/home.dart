@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:douban_movies/network/http_request.dart';
+import 'package:douban_movies/models/home_model.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -15,25 +16,43 @@ class Home extends StatelessWidget {
 }
 
 class HomeBody extends StatefulWidget {
+  const HomeBody({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() => _HomeState();
 }
 
 class _HomeState extends State<HomeBody> {
+  List<MovieItem> moviesItems = [];
+
   @override
   void initState() {
     super.initState();
     HttpRequest.request('https://api.vvhan.com/api/douban', method: 'get').then((res) {
       final data = res.data['data'];
-      print(data);
-      print(data.runtimeType);
+      List<MovieItem> items = [];
+      for (final movie in data) {
+        items.add(MovieItem.fromMap(movie));
+      }
+      print(moviesItems);
+      setState(() {
+        moviesItems = items;
+      });
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-        child: Text('首页11', style: TextStyle(fontSize: 20, color: Colors.blue))
+    return Center(
+       child: ListView.builder(
+           itemCount: moviesItems.length,
+           itemBuilder: (BuildContext context, int index) {
+             return ListTile(
+               leading: Image.network(moviesItems[index].info.imgurl),
+               title: Text(moviesItems[index].title)
+             );
+           }
+       )
     );
   }
 }
