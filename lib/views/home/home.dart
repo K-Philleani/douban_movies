@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:douban_movies/network/http_request.dart';
 import 'package:douban_movies/models/home_model.dart';
+import 'package:douban_movies/views/home/childWidget/movie_list_item.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -47,10 +48,7 @@ class _HomeState extends State<HomeBody> {
        child: ListView.builder(
            itemCount: moviesItems.length,
            itemBuilder: (BuildContext context, int index) {
-             return ListTile(
-               leading: Image.network(moviesItems[index].info.imgurl),
-               title: Text(moviesItems[index].title)
-             );
+             return MovieListItem(moviesItems[index]);
            }
        )
     );

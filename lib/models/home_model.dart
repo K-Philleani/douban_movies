@@ -1,3 +1,6 @@
+
+int counter = 1;
+
 class Info {
   late String url;
   late String imgurl;
@@ -6,21 +9,23 @@ class Info {
   late String pingjia;
 
   Info.fromMap(Map<String, dynamic> json) {
-    this.url = json['url'];
-    this.imgurl = json['imgurl'];
-    this.yanyuan = json['yanyuan'];
-    this.pingfen = json['pingfen'];
-    this.pingjia = json['pingjia'];
+    url = json['url'];
+    imgurl = json['imgurl'];
+    yanyuan = json['yanyuan'];
+    pingfen = json['pingfen'];
+    pingjia = json['pingjia'];
   }
 }
 
 
 class MovieItem {
   late String title;
+  late int rank;
   late Info info;
 
   MovieItem.fromMap(Map<String, dynamic> json) {
-    this.title = json['title'];
-    this.info = Info.fromMap(json['info']);
+    rank = counter++;
+    title = json['title'];
+    info = Info.fromMap(json['info']);
   }
 }
