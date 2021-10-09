@@ -11,7 +11,7 @@ class Home extends StatelessWidget {
       appBar: AppBar(
         title: const Text('首页')
       ),
-      body: HomeBody()
+      body: const HomeBody()
     );
   }
 }
@@ -35,7 +35,6 @@ class _HomeState extends State<HomeBody> {
       for (final movie in data) {
         items.add(MovieItem.fromMap(movie));
       }
-      print(moviesItems);
       setState(() {
         moviesItems = items;
       });

@@ -26,6 +26,7 @@ flutter:
      - assets/images/tabbar/mall_active.png
      - assets/images/tabbar/home_active.png
      - assets/images/tabbar/subject_active.png
+     - assets/images/home/wish.png
   # fonts:
   #   - family: Schyler
   #     fonts:
