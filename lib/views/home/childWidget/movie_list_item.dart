@@ -54,16 +54,17 @@ class MovieListItem extends StatelessWidget {
 
   // 中间部分内容
   Widget centerContent() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children:  <Widget>[
-        imageShow(),
-        Expanded(
-            child: Text('文字')
-        ),
-        Text('分割线'),
-        wishBtn()
-      ],
+    return Container(
+      height: 150,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children:  <Widget>[
+          imageShow(),
+          getDesc(),
+          Text('分割线'),
+          wishBtn()
+        ],
+      ),
     );
   }
 
@@ -79,15 +80,59 @@ class MovieListItem extends StatelessWidget {
   Widget wishBtn() {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 10),
-      color: Colors.red,
       child: Column(
         children: <Widget>[
           Image.asset('assets/images/home/wish.png', width: 32),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           const Text('想看', style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 235, 170, 60)))
         ],
       ),
     );
+  }
+
+  // 详情描述
+  Widget getDesc() {
+    return Expanded(
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              movieName(),
+              getRatingWidget(),
+              getMovieIntroduce()
+            ],
+          ),
+        )
+    );
+  }
+
+  // 电影名称
+  Widget movieName() {
+    return Stack(
+      alignment: AlignmentDirectional.topStart,
+      children: <Widget>[
+        const Icon(Icons.play_circle_outline, color: Colors.redAccent),
+        Text.rich(
+          TextSpan(
+            children: [
+              TextSpan(text: "      " + item.title, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              TextSpan(text: "(${item.info.pingfen})", style: TextStyle(fontSize: 18, color: Colors.black54))
+            ]
+          ),
+          maxLines: 2,
+        )
+      ],
+    );
+  }
+
+  Widget getRatingWidget() {
+    return Text('评分');
+  }
+
+  Widget getMovieIntroduce() {
+    final String intro = item.info.yanyuan;
+    return Text(intro, maxLines: 3, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 16),);
   }
 }
 
